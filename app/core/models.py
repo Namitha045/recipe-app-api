@@ -32,7 +32,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser,PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     """User is the system"""
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
@@ -61,6 +61,7 @@ class Recipe(models.Model):
     def __str__(self):
         return self.title
 
+
 class Tag(models.Model):
     """Tag for filtering recipes"""
     name = models.CharField(max_length=255)
@@ -72,6 +73,7 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+
 class Ingredient(models.Model):
     """Ingredient for recipes"""
     name = models.CharField(max_length=255)
@@ -82,5 +84,3 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.name
-
-

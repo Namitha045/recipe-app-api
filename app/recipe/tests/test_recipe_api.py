@@ -122,9 +122,9 @@ class PrivateRecipeAPITests(TestCase):
         """Test partial update of a recipe."""
         original_link = 'https://example.com/recipe.pdf'
         recipe = create_recipe(
-            user = self.user,
-            title ='Sample recipe title',
-            link = original_link,
+            user=self.user,
+            title='Sample recipe title',
+            link=original_link,
         )
 
         payload = {'title': 'New recipe title'}
@@ -201,7 +201,7 @@ class PrivateRecipeAPITests(TestCase):
             'title': 'Thai prawn Curry',
             'time_minutes': 30,
             'price': Decimal('2.50'),
-            'tags': [{'name':'Thai'}, {'name':'Dinner'}]
+            'tags': [{'name': 'Thai'}, {'name': 'Dinner'}]
         }
         res = self.client.post(RECIPES_URL, payload, format='json')
 
@@ -212,7 +212,7 @@ class PrivateRecipeAPITests(TestCase):
         self.assertEqual(recipe.tags.count(), 2)
         for tag in payload['tags']:
             exists = recipe.tags.filter(
-                name = tag['name'],
+                name=tag['name'],
                 user=self.user
             ).exists()
             self.assertTrue(exists)
@@ -224,7 +224,7 @@ class PrivateRecipeAPITests(TestCase):
             'title': 'Pongal',
             'time_minutes': 60,
             'price': Decimal('4.50'),
-            'tags': [{'name':'Indian'},{'name':'Breakfast'}],
+            'tags': [{'name': 'Indian'},{'name': 'Breakfast'}],
         }
         res = self.client.post(RECIPES_URL, payload, format='json')
 
@@ -236,8 +236,8 @@ class PrivateRecipeAPITests(TestCase):
         self.assertIn(tag_indian, recipe.tags.all())
         for tag in payload['tags']:
             exists = recipe.tags.filter(
-                name = tag['name'],
-                user = self.user
+                name=tag['name'],
+                user=self.user
             ).exists()
             self.assertTrue(exists)
 
@@ -287,7 +287,7 @@ class PrivateRecipeAPITests(TestCase):
             'title': 'Caulifower Tacos',
             'time_minutes': 60,
             'price': Decimal('4.30'),
-            'ingredients': [{'name': 'Caulifower'}, {'name':'Salt'}]
+            'ingredients': [{'name': 'Caulifower'}, {'name': 'Salt'}]
         }
         res = self.client.post(RECIPES_URL, payload, format='json')
 
@@ -310,7 +310,7 @@ class PrivateRecipeAPITests(TestCase):
             'title': 'Vietnamese Soup',
             'time_minutes': 25,
             'price': '2.25',
-            'ingredients': [{'name':'Lemon'}, {'name': 'Fish Sauce'}],
+            'ingredients': [{'name': 'Lemon'}, {'name': 'Fish Sauce'}],
         }
         res = self.client.post(RECIPES_URL, payload, format='json')
 
@@ -331,7 +331,7 @@ class PrivateRecipeAPITests(TestCase):
         """Test creating an ingredient when updating a recipe"""
         recipe = create_recipe(user=self.user)
 
-        payload = {'ingredients': [{'name':'Limes'}]}
+        payload = {'ingredients': [{'name': 'Limes'}]}
         url = detail_url(recipe.id)
         res = self.client.patch(url, payload, format='json')
 
